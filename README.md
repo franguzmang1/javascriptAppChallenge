@@ -8,6 +8,8 @@ Instructions for running the project:
 
 3 - Inside the command line step into the main project folder "appChallengefranciscoguzman".
 
+To proceed you need to have installed node.js and npm package manager, if you do not have it installed go here: "https://nodejs.org/en/download/"
+
 4 - Run "npm install" to install all the packages and dependencies required to run the project.
 
 5 - After installation is done run "npm start" to run the project.
