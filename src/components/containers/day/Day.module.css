@@ -1,0 +1,67 @@
+.timeFieldStyle {
+    background-color: white;
+    border-color: #ff931e;
+    border-radius: 17px;
+    border-width: 3px;
+    font-size: 20px;
+    width: 53px !important;
+    height: 35px !important;
+    text-align: center;
+}
+
+
+
+.timeFieldStyle:focus {
+    border-color: transparent;
+}
+
+.div1 {
+    height: 10vh;
+    min-height: 10vh;
+    max-height: 10vh;
+  }
+  
+.text {
+    display: inline;
+    text-align: start;
+    font-size: 16px;
+}
+
+.divInput{
+    display: inline-block;
+    background-color: transparent;
+    font-size: 20px;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+
+.divInput p {
+    margin-top: 3px;
+}
+
+.divOfTimes{
+    margin-top: 50px;
+    display: block;
+}
+
+.validationText {
+    color: red;
+    font-size: 12px;
+    margin: 0;
+}
+
+
+.nextDiv {
+    margin: 40px;
+    margin-top: 30px;
+}
+
+.submitButton {
+    height: 35px;
+    width: 100px;
+    border-radius: 17px;
+    background-color: #e2d3be;
+    border: 2px solid #ff931e;
+    margin-top: 25px;
+    font-size: 20px;
+}
