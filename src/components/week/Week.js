@@ -142,7 +142,7 @@ class Week extends Component {
 
         let textOfHours = null;
         if(this.state.weekWorkedHours===this.state.expectedHours){
-            textOfHours = <p> You have met the hour requirement of the week!</p>;
+            textOfHours = <p> You have met the hours requirement of the week!</p>;
         } else if (this.state.weekWorkedHours<this.state.expectedHours){
             let dur1 = moment.duration(this.state.weekWorkedHours);
             let dur2 = moment.duration(this.state.expectedHours);
@@ -158,7 +158,7 @@ class Week extends Component {
             const stringToDisplay = `${totalHours}:${totalMinutes}`;
 
 
-            textOfHours = <p> You have not met the hour requirement of the week
+            textOfHours = <p> You have not met the hours requirement of the week
                 by {stringToDisplay} hours
             </p>
         }else {

@@ -305,7 +305,9 @@ class Day extends Component {
         //validation texts
         let validationP1= this.state.validationText1 ? 
         <p className={classes.validationText}> {this.state.validationText1}</p> : 
-        null;
+        <p className={classes.informationText}>Time is inputted in 24-hour format </p>;
+
+        
         let validationP2 = this.state.validationText2 ? 
         <p className={classes.validationText}> {this.state.validationText2}</p> :
         null;
@@ -350,9 +352,12 @@ class Day extends Component {
         let f = moment.utc(diff).format("HH:mm");
 
         textToDisplay = <p>You did not meet the hours requirement, there 
-        were {f} hours left to complete on this day</p>;
+        are {f} hours left to complete on this day</p>;
         }
-        
+        let buttonIsDisabled;
+        if (this.state.validationText1 || this.state.validationText2){
+            buttonIsDisabled = true;
+        }
 
       return (
         <Aux>
@@ -360,7 +365,7 @@ class Day extends Component {
             </div>
             
             <h2>Day of the week selected: {stringDay}</h2>
-
+            
             <div className={classes.divOfTimes}>
                 {validationP1}
                 <div className={classes.divInput}>
@@ -395,7 +400,7 @@ class Day extends Component {
                 </div>
             </div>
 
-            <button onClick={this.clickedButton} class={classes.submitButton}>SUBMIT</button>
+            <button disabled={buttonIsDisabled} onClick={this.clickedButton} class={classes.submitButton}>SUBMIT</button>
 
             <div className={classes.nextDiv}>
                 <h2>Expected hours: {this.state.expectedHours.substring(1,2)}</h2>

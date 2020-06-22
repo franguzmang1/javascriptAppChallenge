@@ -50,6 +50,12 @@
     margin: 0;
 }
 
+.informationText {
+    color: black;
+    font-size: 12px;
+    margin: 0;
+}
+
 
 .nextDiv {
     margin: 40px;
