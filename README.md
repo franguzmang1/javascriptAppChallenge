@@ -15,3 +15,5 @@ To proceed you need to have installed node.js and npm package manager, if you do
 5 - After installation is done run "npm start" to run the project.
 
 6 - The project should open itself in a new tab in the navigator, if not, check in the console the port the app is deployed at and type in the navigator "localhost:#port".
+
+7 - Start entering your hours in each day of the week!
