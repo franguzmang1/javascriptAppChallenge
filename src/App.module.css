@@ -4,6 +4,18 @@
   width: 100vw;
 }
 
+
+.h1here{
+  margin-top: 100px;
+}
+/*
+.divToCreateSpacing {
+  height: 20vh;
+  min-height: 20vh;
+  max-height: 20vh;
+}
+*/
+
 .div1 {
   height: 30vh;
   min-height: 30vh;

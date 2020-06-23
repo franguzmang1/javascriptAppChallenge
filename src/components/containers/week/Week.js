@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../hoc/auxiliary/auxiliary';
+import Aux from '../../hoc/auxiliary/auxiliary';
 import classes from './Week.module.css';
 import * as firebase from 'firebase';
 
@@ -11,6 +11,7 @@ var moment = require('moment');
 
 class Week extends Component {
     state = {
+        //each day has its variable. created from the beginning like this, foreseeing more data could be added to each day
         monday: {
             current: false
         },
@@ -26,13 +27,16 @@ class Week extends Component {
         friday: {
             current: false
         },
-        expectedHours: null,
-        weekWorkedHours: null
+        expectedHours: null,//total expected hours of the week
+        weekWorkedHours: null//total worked hours in the week
     };
  
-    componentDidMount(){
+    componentWillMount(){
         var d = new Date();
         var n = d.getDay();
+
+        //switch that depending on the day sets the current day to the actual current day as said in javascript
+        //so that the current date is displayed differently
         switch(n){
             case 1:
                  const newMonday = {
@@ -66,84 +70,94 @@ class Week extends Component {
                 break;
         }
 
+        //getting data from firebase
         const rootRef = firebase.database().ref().child('week');
         rootRef.once('value', snap =>{
-            //calculate the total amount of hours worked in the week
-            //display the expected worked hours
 
-            
-
-            this.sumWeekWorkedHours(snap.val().days);
-            this.sumWeekExpectedHours(snap.val().expectedHoursPerDay);
-            console.log(snap.val());
-
+            //calculate week's expected and working hours and save it to the state
+            this.sumWeekWorkedHoursAndExpectedHours(snap.val());
         });
 
     }
 
-    sumWeekExpectedHours(expectedHoursPerDay){
+    //function to calculate the week's worked and expected hours and save it to the state
+    sumWeekWorkedHoursAndExpectedHours(object){
 
-
-        let duration = moment.duration(expectedHoursPerDay);
+        let deObject = object.days;
+        //initializing the total time each day as durations by the library moment.js
+        let durationMonday = moment.duration(deObject.monday.totalWorkedHours);
+        let durationTuesday = moment.duration(deObject.tuesday.totalWorkedHours);
+        let durationWednesday = moment.duration(deObject.wednesday.totalWorkedHours);
+        let durationThursday = moment.duration(deObject.thursday.totalWorkedHours);
+        let durationFriday = moment.duration(deObject.friday.totalWorkedHours);
         
-        var dur = moment.duration(duration.asMinutes()*5, 'minutes');
-
-        const totalHours = dur.days()*24+dur.hours();
-        let minutes = dur.minutes();
-        if(minutes<10){
-            minutes = '0'+minutes;
-        }
-
-        const stringToPut = `${totalHours}:${minutes}`;
-        this.setState({expectedHours: stringToPut});
-    }
-
-    sumWeekWorkedHours(daysObject){
-        var dateMonday = new Date();
-        var dateTuesday = new Date();
-        var dateWednesday = new Date();
-        var dateThursday = new Date();
-        var dateFriday = new Date();
-
-        let durationMonday = moment.duration(daysObject.monday.totalWorkedHours);
-        let durationTuesday = moment.duration(daysObject.tuesday.totalWorkedHours);
-        let durationWednesday = moment.duration(daysObject.wednesday.totalWorkedHours);
-        let durationThursday = moment.duration(daysObject.thursday.totalWorkedHours);
-        let durationFriday = moment.duration(daysObject.friday.totalWorkedHours);
-        
-
+        //summing the durations of each day worked hours
         var resultDuration = durationMonday.add(durationTuesday.add(durationWednesday.add(durationThursday.add(durationFriday))));
 
+        //summing the total hours and minutes 
+        let totalHours = resultDuration.days()*24 + resultDuration.hours();
+        if(totalHours<10){//if total hours is less than 0, put the 0 behind the number
+            totalHours = '0'+totalHours;
+        }
 
-        const totalHours = resultDuration.days()*24 + resultDuration.hours();
         let totalMinutes = resultDuration.minutes();
-        if(totalMinutes<10){
+        if(totalMinutes<10){//if total minutes is less than 0, put the 0 behind the number
             totalMinutes = '0'+totalMinutes;
         }
 
-        const toSave = `${totalHours}:${totalMinutes}`;
-        this.setState({weekWorkedHours: toSave});
+        //saving it to the state
+        const toSaveWeekWorkedHours = `${totalHours}:${totalMinutes}`;
         
+        
+        
+        
+        let duration = moment.duration(object.expectedHoursPerDay);
+        
+        //multiplying the expectedHoursPerday by 5
+        var dur = moment.duration(duration.asMinutes()*5, 'minutes');
+
+        let totalHours2 = dur.days()*24+dur.hours();
+        if(totalHours2<10){//if total hours is less than 0, put the 0 behind the number
+            totalHours2 = '0'+totalHours2;
+        }
+
+        let minutes = dur.minutes();
+        if(minutes<10){//if total hours is less than 0, put the 0 behind the number
+            minutes = '0'+minutes;
+        }
+
+        const stringToPutExpectedHours = `${totalHours2}:${minutes}`;        
+            
+        //saving the expectedHours of the week and the worked hours to the state    
+        this.setState({weekWorkedHours: toSaveWeekWorkedHours, expectedHours: stringToPutExpectedHours});
+
     }
+
 
     render(){
 
+        //calculate the styling of each day
         let mondayStyle = this.state.monday.current ? {"background-color": "white"} : null;
         let tuesdayStyle = this.state.tuesday.current ? {"background-color": "white"} : null;
         let wednesdayStyle = this.state.wednesday.current ? {"background-color": "white"} : null;
         let thursdayStyle = this.state.thursday.current ? {"background-color": "white"} : null;
         let fridayStyle = this.state.friday.current ? {"background-color": "white"} : null;
 
+        //a text that is active if that day is the current day
         let todayTextMonday = this.state.monday.current ? <p>Today</p> : null;
         let todayTextTuesday = this.state.tuesday.current ? <p>Today</p> : null;
         let todayTextWednesday = this.state.wednesday.current ? <p>Today</p> : null;
         let todayTextThursday = this.state.thursday.current ? <p>Today</p> : null;
         let todayTextFriday = this.state.friday.current ? <p>Today</p> : null;
 
+
+        console.log('weekWorkedHours: '+this.state.weekWorkedHours);
+        console.log('expectedHours:'+this.state.expectedHours);
+        //logic to display text about the hours requirement
         let textOfHours = null;
-        if(this.state.weekWorkedHours===this.state.expectedHours){
+        if(this.state.weekWorkedHours===this.state.expectedHours){//the hour requirement is met perfectly
             textOfHours = <p> You have met the hours requirement of the week!</p>;
-        } else if (this.state.weekWorkedHours<this.state.expectedHours){
+        } else if (this.state.weekWorkedHours<this.state.expectedHours){//the hours requirement is not met
             let dur1 = moment.duration(this.state.weekWorkedHours);
             let dur2 = moment.duration(this.state.expectedHours);
 
@@ -161,7 +175,7 @@ class Week extends Component {
             textOfHours = <p> You have not met the hours requirement of the week
                 by {stringToDisplay} hours
             </p>
-        }else {
+        }else {//the hour requirement is surpassed
             let dur1 = moment.duration(this.state.weekWorkedHours);
             let dur2 = moment.duration(this.state.expectedHours);
 
@@ -234,10 +248,7 @@ class Week extends Component {
                 <p> You have this amount of hours in total this week {this.state.weekWorkedHours}</p>
                 <p> Amount expected hours this week: {this.state.expectedHours}</p>
                 {textOfHours}
-                
                 </div>
-
-
         </Aux>
       );
     }
