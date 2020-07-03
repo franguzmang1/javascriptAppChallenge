@@ -1,36 +1,58 @@
 .theWeek {
-    background-color: transparent;
-    width: 80vw;
-    height: 320px;
-    margin: auto;
-    align-items: center;
+  background-color: transparent;
+  width: 80vw;
+  height: 320px;
+  margin: auto;
+  align-items: center;
 }
 
 /*style the link tag in theweek*/
-.theWeek a{
-    color: black;
+.theWeek a {
+  color: black;
 }
 
-
 .dayBox {
-    vertical-align: top;
-    display: inline-block;
-    width: 15vh;
-    height: 140px;
-    border: 2px solid black;
-    margin-left: 18px;
-    margin-right: 18px;
-    background-color: #e2d3be;
+  vertical-align: top;
+  display: inline-block;
+  width: 120px;
+  height: 140px;
+  border: 2px solid black;
+  margin-left: 18px;
+  margin-right: 18px;
+  background-color: #e2d3be;
 }
 
 .textOfSelectDay {
-    color: #ff931e;
+  color: #ff931e;
 }
 
-
 .div1 {
-    height: 30vh;
-    min-height: 30vh;
-    max-height: 30vh;
+  height: 30vh;
+  min-height: 30vh;
+  max-height: 30vh;
+}
+
+@media only screen and (max-width: 700px) {
+  .dayBox {
+    vertical-align: top;
+    display: inline-block;
+    width: 52px;
+    height: 80px;
+    border: 2px solid black;
+    margin-left: 8px;
+    margin-right: 8px;
+    background-color: #e2d3be;
   }
-  
+  .dayBox p {
+    font-size: 10px;
+  }
+  .div1 {
+    height: 14vh;
+    min-height: 14vw;
+    max-height: 14vh;
+  }
+  .theWeek {
+    height: 200px;
+  }
+}
+

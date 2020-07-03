@@ -4,8 +4,7 @@
   width: 100vw;
 }
 
-
-.h1here{
+.h1here {
   margin-top: 100px;
 }
 /*
@@ -57,18 +56,20 @@
   }
 }
 
-.h2OfText{
+.h2OfText {
   display: none;
 }
 
 /*poner como maximo 700 pixeles donde no se muestre nada*/
 
-@media only screen and (max-width: 700px){
-  .App{
+@media only screen and (max-width: 700px) {
+  /*
+  .App {
     display: none;
   }
-  .h2OfText{
+  .h2OfText {
     margin-top: 40px;
     display: inline-block;
   }
+  */
 }
