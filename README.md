@@ -1,4 +1,6 @@
-# Javascript Challenge of Francisco Guzman for Oowlish
+# Javascript Challenge of Francisco Guzman 
+This project was done for an interview for a Company
+
 
 Instructions for running the project:
 
