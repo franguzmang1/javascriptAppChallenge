@@ -2,7 +2,7 @@
 
 Instructions for running the project:
 
-1 - Download it or clone it running "git clone git@gitlab.com:wonts32/appchallengefranciscoguzman.git" on the command line.
+1 - Download it or clone it running "git clone" on the command line.
 
 2 - Enter your Gitlab credentials.
 
