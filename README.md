@@ -4,7 +4,7 @@ This project was done for an interview for a Company
 
 Instructions for running the project:
 
-1 - Download it or clone it running "git clone" on the command line.
+1 - Download it or clone it running "git clone https://github.com/franguzmang1/javascriptAppChallenge.git" on the command line.
 
 2 - Inside the command line step into the main project folder "javascriptAppChallenge".
 
